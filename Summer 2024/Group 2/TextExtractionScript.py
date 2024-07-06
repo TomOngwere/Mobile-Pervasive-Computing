@@ -1,15 +1,8 @@
-# importing required modules 
-from pypdf import PdfReader 
+from pypdf import PdfReader
 
-# creating a pdf reader object 
-reader = PdfReader(r"C:\Users\yprat\Downloads\Test Hayley.pdf") 
 
-# printing number of pages in pdf file 
-print(len(reader.pages)) 
-
-# getting a specific page from the pdf file 
-page = reader.pages[0] 
-
-# extracting text from page 
-text = page.extract_text() 
-print(text) 
+def getText():
+    reader = PdfReader(r"./Test Hayley.pdf")
+    page = reader.pages[0]
+    text = page.extract_text()
+    return text
