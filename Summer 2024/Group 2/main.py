@@ -2,4 +2,5 @@ import TextExtractionScript
 import llamaCall
 
 text = TextExtractionScript.getText()
-print(llamaCall.callLlama3(text + "; what disease does the patient have?"))
+print(text)
+print(llamaCall.callLlama3(text + "; extract vital parameters from the text"))
