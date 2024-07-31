@@ -1,13 +1,15 @@
 import TextExtractionScript
 import llamaCall
 import mysqlCall
-import mongoCall
+
+# import mongoCall
 import re
 
 text = TextExtractionScript.getText()
 resultText = llamaCall.callLlama3(
     text
-    + "; format the given text into a json format do not ignore any information "
+    + "; suggest some complications that can happen in bullet points"
+    # + "; format the given text into a json format do not ignore any information "
     # + """; extract vital paramters from the text, write me an sql query to insert data into mysql table named patient_data with schema
     #         +-----------------+-------------+------+-----+---------+-------+
     #         | Field           | Type        | Null | Key | Default | Extra |
