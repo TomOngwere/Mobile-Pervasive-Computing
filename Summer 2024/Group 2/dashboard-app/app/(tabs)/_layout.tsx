@@ -4,6 +4,7 @@ import React from "react";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -30,10 +31,20 @@ export default function TabLayout() {
       <Tabs.Screen
         name="explore"
         options={{
-          title: "Explore",
+          title: "Vitals",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "code-slash" : "code-slash-outline"}
+            <AntDesign name="barschart" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="complications"
+        options={{
+          title: "Complications",
+          tabBarIcon: ({ color, focused }) => (
+            <AntDesign
+              name={focused ? "exclamationcircle" : "exclamationcircleo"}
+              size={24}
               color={color}
             />
           ),

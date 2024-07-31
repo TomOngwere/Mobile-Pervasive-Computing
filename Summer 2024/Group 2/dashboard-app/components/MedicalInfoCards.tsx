@@ -9,49 +9,49 @@ const data = [
     id: "1",
     type: "graph",
     title: "Blood Pressure",
-    content: [120, 125, 130, 135, 140, 145, 150],
+    content: [120, 122, 118, 124, 126, 130, 128], // More realistic fluctuations
   },
   {
     id: "2",
     type: "graph",
     title: "Heart Rate",
-    content: [60, 65, 70, 75, 80, 85, 90],
+    content: [72, 75, 78, 70, 73, 76, 79], // Realistic variability
   },
   {
     id: "3",
     type: "graph",
     title: "Cholesterol",
-    content: [180, 190, 200, 210, 220, 230, 240],
+    content: [190, 195, 185, 200, 210, 205, 198], // Non-linear changes
   },
   {
     id: "4",
     type: "graph",
     title: "Blood Sugar",
-    content: [90, 95, 100, 105, 110, 115, 120],
+    content: [110, 105, 120, 115, 130, 125, 118], // Varied levels
   },
   {
     id: "5",
     type: "graph",
     title: "Hemoglobin",
-    content: [13, 13.5, 14, 14.5, 15, 15.5, 16],
+    content: [14.0, 13.8, 14.2, 13.9, 14.1, 13.7, 14.0], // Small fluctuations
   },
   {
     id: "6",
     type: "graph",
     title: "BMI",
-    content: [20, 21, 22, 23, 24, 25, 26],
+    content: [22.0, 22.5, 23.0, 22.8, 23.2, 22.9, 23.1], // Slight variations
   },
   {
     id: "7",
     type: "graph",
     title: "Oxygen Saturation",
-    content: [95, 96, 97, 98, 99, 100, 99],
+    content: [98, 97, 99, 98, 96, 99, 98], // Minor fluctuations
   },
   {
     id: "8",
     type: "graph",
     title: "Temperature",
-    content: [98.6, 98.7, 98.8, 98.9, 99, 99.1, 99.2],
+    content: [98.6, 98.8, 98.7, 98.5, 99.0, 98.9, 98.7], // Small changes
   },
 ];
 
@@ -73,7 +73,7 @@ const MedicalInfoCards = () => {
             backgroundColor: "#ffffff",
             backgroundGradientFrom: "#ffffff",
             backgroundGradientTo: "#ffffff",
-            decimalPlaces: 0, // Minimalist, no decimal places
+            decimalPlaces: 1, // Minimalist, 1 decimal place
             color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
             style: { borderRadius: 16 },
