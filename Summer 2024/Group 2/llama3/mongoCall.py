@@ -14,8 +14,19 @@ def mongoCall():
 
 
 def mongoInsert(db, data):
+    return db.patient_data.insert_one(data)
+
+
+def mongoInsertMany(db, data):
     return db.patient_data.insert_many(data)
 
 
-client = mongoCall()
-mongoInsert(client["mpc"], [{"name": "vinit"}])
+def mongoFind(db, term):
+    return db.patient_data.find({}, term[0])
+
+
+# client = mongoCall()
+# mongoInsert(client["mpc"], [{"name": "vinit"}])
+# cursor = mongoFind(client["mpc"], [{"name": "vinit"}])
+# for i in cursor:
+#     print(i)
