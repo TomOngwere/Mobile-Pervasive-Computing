@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import {
   AppRegistry,
   StyleSheet,
@@ -15,10 +16,19 @@ interface Vital {
   value: string;
   icon: string;
 }
-
 const App: React.FC = () => {
+  const [data, setData] = useState("");
+  axios
+    .get("http://localhost:3000/user/1")
+    .then((response) => {
+      setData(response.data);
+    })
+    .catch((error) => {
+      console.error("There was an error making the GET request!", error);
+    });
+
   const vitals: Vital[] = [
-    { name: "Heart Rate", value: "72 bpm", icon: "heart" },
+    { name: "Heart Rate", value: data + " bpm", icon: "heart" },
     { name: "Blood Pressure", value: "120/80 mmHg", icon: "heartbeat" },
     { name: "Body Temperature", value: "98.6 °F", icon: "thermometer" },
     {
