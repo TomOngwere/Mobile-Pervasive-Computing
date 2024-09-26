@@ -18,6 +18,8 @@ interface Vital {
 }
 const App: React.FC = () => {
   const [data, setData] = useState("");
+  console.log(data);
+  console.log(JSON.stringify(data));
   const [temperature,setTemperature] = useState("");
   axios
     .get("http://localhost:3000/user/1")
