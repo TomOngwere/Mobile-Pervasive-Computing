@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   AppRegistry,
@@ -11,63 +11,98 @@ import {
 import { Card, Avatar } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
-interface Vital {
-  name: string;
-  value: string;
-  icon: string;
-}
 const App: React.FC = () => {
-  const [data, setData] = useState("");
-  console.log(data);
-  console.log(JSON.stringify(data));
-  const [temperature,setTemperature] = useState("");
-  axios
-    .get("http://localhost:3000/user/1")
-    .then((response) => {
-      // setData(response.data);
-      // let temperture = JSON.parse(response.data);
-    })
-    .catch((error) => {
-      console.error("There was an error making the GET request!", error);
-    });
+  const [patients, setPatients] = useState<Patient[]>([]);
 
-  const vitals: Vital[] = [
-    { name: "Heart Rate", value: JSON.stringify(data) + " bpm", icon: "heart" },
-    { name: "Blood Pressure", value: "120/80 mmHg", icon: "heartbeat" },
-    { name: "Body Temperature", value: "98.6 °F", icon: "thermometer" },
-    {
-      name: "Respiratory Rate",
-      value: "16 breaths/min",
-      icon: "lungs",
-    },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/user/1");
+        setPatients(response.data);
+      } catch (error) {
+        console.error("There was an error making the GET request!", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
-        <View style={styles.profileContainer}>
-          <Avatar
-            rounded
-            size="xlarge"
-            source={{
-              uri: "http://www.mubis.es/media/users/3388/130947/john-wick-se-estrenara-aqui-directamente-en-tv-original.jpg",
-            }}
-            containerStyle={styles.avatar}
-          />
-          <Text style={styles.userName}>John Wick</Text>
-        </View>
-        <Text style={styles.header}>Health Dashboard</Text>
-        <View style={styles.cardContainer}>
-          {vitals.map((vital, index) => (
-            <Card key={index} containerStyle={styles.card}>
-              <View style={styles.cardHeader}>
-                <Icon name={vital.icon} size={24} color="#517fa4" />
-                <Card.Title style={styles.cardTitle}>{vital.name}</Card.Title>
-              </View>
-              <Text style={styles.vitalValue}>{vital.value}</Text>
-            </Card>
-          ))}
-        </View>
+        {patients.map((patientData, patientIndex) => (
+          <View key={patientIndex} style={styles.profileContainer}>
+            <Avatar
+              rounded
+              size="xlarge"
+              source={{
+                uri: "http://www.mubis.es/media/users/3388/130947/john-wick-se-estrenara-aqui-directamente-en-tv-original.jpg",
+              }}
+              containerStyle={styles.avatar}
+            />
+            <Text style={styles.userName}>{patientData.patient.name}</Text>
+            <Text style={styles.header}>Health Dashboard</Text>
+            <View style={styles.cardContainer}>
+              <Card containerStyle={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Icon name="heart" size={24} color="#517fa4" />
+                  <Card.Title style={styles.cardTitle}>Heart Rate</Card.Title>
+                </View>
+                <Text style={styles.vitalValue}>
+                  {patientData.vitalSigns.heartRate} <Text>bpm</Text>
+                </Text>
+              </Card>
+
+              <Card containerStyle={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Icon name="heartbeat" size={24} color="#517fa4" />
+                  <Card.Title style={styles.cardTitle}>
+                    Blood Pressure
+                  </Card.Title>
+                </View>
+                <Text style={styles.vitalValue}>
+                  {patientData.vitalSigns.bloodPressure.systolic}/
+                  {patientData.vitalSigns.bloodPressure.diastolic} <Text>mmHg</Text>
+                </Text>
+              </Card>
+
+              <Card containerStyle={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Icon name="thermometer" size={24} color="#517fa4" />
+                  <Card.Title style={styles.cardTitle}>
+                    Body Temperature
+                  </Card.Title>
+                </View>
+                <Text style={styles.vitalValue}>
+                  {patientData.vitalSigns.temperature} <Text>°F</Text>
+                </Text>
+              </Card>
+
+              <Card containerStyle={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Icon name="lungs" size={24} color="#517fa4" />
+                  <Card.Title style={styles.cardTitle}>
+                    Respiratory Rate
+                  </Card.Title>
+                </View>
+                <Text style={styles.vitalValue}>
+                  {patientData.vitalSigns.respiratoryRate} <Text>breaths/min</Text>
+                </Text>
+              </Card>
+
+              <Card containerStyle={styles.card}>
+                <View style={styles.cardHeader}>
+                  <Icon name="lungs" size={24} color="#517fa4" />
+                  <Card.Title style={styles.cardTitle}>
+                    Oxygen Saturation
+                  </Card.Title>
+                </View>
+                <Text style={styles.vitalValue}>
+                  {patientData.vitalSigns.oxygenSaturation} <Text>%</Text>
+                </Text>
+              </Card>
+            </View>
+          </View>
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
@@ -119,5 +154,4 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent("HealthTrackingApp", () => App);
-
 export default App;
