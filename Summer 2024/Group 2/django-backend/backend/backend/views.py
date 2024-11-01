@@ -1,5 +1,19 @@
+from django.http import HttpResponse
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+
+
+def helloworld(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+
+
+def userHandler(request):
+    client = mongoCall()
+    return HttpResponse("Hello, world. You're at the polls index.")
+
+
+def mongoFind(db):
+    return db["mpc"]["patient_data"].find({"userid": 1})
 
 
 def mongoCall():
@@ -11,22 +25,3 @@ def mongoCall():
         return client
     except Exception as e:
         print(e)
-
-
-def mongoInsert(db, data):
-    return db.patient_data.insert_one(data)
-
-
-def mongoInsertMany(db, data):
-    return db.patient_data.insert_many(data)
-
-
-def mongoFind(db):
-    return db["mpc"]["patient_data"].find({"userid":1})
-
-
-# client = mongoCall()
-# mongoInsert(client["mpc"], [{"name": "vinit"}])
-# cursor = mongoFind(client["mpc"], [{"name": "vinit"}])
-# for i in cursor:
-#     print(i)
