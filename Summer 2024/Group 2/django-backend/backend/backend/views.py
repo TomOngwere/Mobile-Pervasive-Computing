@@ -7,16 +7,19 @@ def helloworld(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 
 
-def userHandler(request):
-    client = mongoCall()
+def allUsers(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 
 
-def mongoFind(db):
-    return db["mpc"]["patient_data"].find({"userid": 1})
+def userHandler(request, user_id):
+    return HttpResponse(mongoFind(user_id))
 
 
-def mongoCall():
+def mongoFind(user_id):
+    return client["mpc"]["patient_data"].find({"userid": user_id})
+
+
+def connectMongo():
     uri = "mongodb+srv://jainvinit14:Ug0WnvF7FuKYTruU@mpc.phvohi3.mongodb.net/?retryWrites=true&w=majority&appName=mpc"
     client = MongoClient(uri, server_api=ServerApi("1"))
     try:
@@ -25,3 +28,5 @@ def mongoCall():
         return client
     except Exception as e:
         print(e)
+
+client = connectMongo()

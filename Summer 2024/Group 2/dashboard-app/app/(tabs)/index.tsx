@@ -17,7 +17,8 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/user/1");
+        const response = await axios.get("http://localhost:8000/user/1");
+        console.log("response type : "+(typeof response.data));
         setPatients(response.data);
       } catch (error) {
         console.error("There was an error making the GET request!", error);
@@ -25,7 +26,7 @@ const App: React.FC = () => {
     };
     fetchData();
   }, []);
-
+  console.log(patients);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
