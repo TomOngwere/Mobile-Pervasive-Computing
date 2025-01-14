@@ -1,3 +1,4 @@
+import json
 from django.http import HttpResponse
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
@@ -8,12 +9,14 @@ def helloworld(request):
 
 
 def userHandler(request):
-    client = mongoCall()
     return HttpResponse("Hello, world. You're at the polls index.")
 
+def userSearch(request,id):
+    return HttpResponse(mongoFind(id))
 
-def mongoFind(db):
-    return db["mpc"]["patient_data"].find({"userid": 1})
+
+def mongoFind(id):
+    return json.dumps(db["mpc"]["patient_data"].find({"userid": 1},{"_id": 0})[0])
 
 
 def mongoCall():
@@ -25,3 +28,5 @@ def mongoCall():
         return client
     except Exception as e:
         print(e)
+
+db = mongoCall()
