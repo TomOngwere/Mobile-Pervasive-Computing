@@ -16,7 +16,7 @@ def userSearch(request,id):
 
 
 def mongoFind(id):
-    return json.dumps(db["mpc"]["patient_data"].find({"userid": 1},{"_id": 0})[0])
+    return json.dumps(list(db["mpc"]["patient_data"].find({"userid": 1},{"_id": 0})))
 
 
 def mongoCall():

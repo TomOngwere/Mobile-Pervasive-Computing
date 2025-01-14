@@ -18,6 +18,7 @@ const App: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:8000/user/1");
+        console.log(response.data);
         setPatients(response.data);
       } catch (error) {
         console.error("There was an error making the GET request!", error);
