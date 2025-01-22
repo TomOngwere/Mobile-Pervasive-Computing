@@ -18,8 +18,7 @@ const App: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:8000/user/1");
-        console.log(response.data);
-        setPatients(response.data);
+        setPatients([response.data[0]]);
       } catch (error) {
         console.error("There was an error making the GET request!", error);
       }
@@ -136,7 +135,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   card: {
-    width: "90%",
+    // width: "100%",
+    alignSelf:'stretch',
     borderRadius: 10,
   },
   cardHeader: {
