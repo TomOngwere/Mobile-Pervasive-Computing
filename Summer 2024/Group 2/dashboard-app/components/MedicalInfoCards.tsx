@@ -65,8 +65,8 @@ const MedicalInfoCards = () => {
             labels: [],
             datasets: [{ data: item.content }],
           }}
-          width={160} // from react-native
-          height={220}
+          width={170} // from react-native
+          height={240}
           yAxisLabel=""
           yAxisSuffix=""
           chartConfig={{
@@ -88,10 +88,8 @@ const MedicalInfoCards = () => {
               stroke: "#ffffff", // Hide grid lines
             },
             propsForLabels: {
-              fontSize: 0, // Hide axis labels
+              fontSize: 10, // Hide axis labels
             },
-            fillShadowGradient: "#000", // Line color
-            fillShadowGradientOpacity: 1, // Solid line color
           }}
           bezier // Smooth curve for the line graph
           style={{ marginVertical: 8, borderRadius: 16 }}
@@ -114,11 +112,11 @@ const MedicalInfoCards = () => {
 const styles = StyleSheet.create({
   row: {
     justifyContent: "space-between",
-    marginBottom: 10,
+    marginBottom:10,
   },
   card: {
     backgroundColor: "#fff",
-    borderRadius: 10,
+    borderRadius: 5,
     padding: 5, // Reduced padding
     margin: 5,
     width: "45%",
