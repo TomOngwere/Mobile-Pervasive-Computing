@@ -34,9 +34,7 @@ const App: React.FC = () => {
             <Avatar
               rounded
               size="xlarge"
-              source={{
-                uri: "http://www.mubis.es/media/users/3388/130947/john-wick-se-estrenara-aqui-directamente-en-tv-original.jpg",
-              }}
+              source={require('../../assets/images/tom_ongwere.jpg')}
               containerStyle={styles.avatar}
             />
             <Text style={styles.userName}>{patientData.patient.name}</Text>
